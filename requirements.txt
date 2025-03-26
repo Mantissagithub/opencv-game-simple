@@ -1,0 +1,5 @@
+opencv-python
+mediapipe
+pyautogui
+Pillow
+numpy==1.21.0
