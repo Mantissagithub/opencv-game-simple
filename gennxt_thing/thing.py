@@ -16,7 +16,7 @@ class HandGestureControl(Node):
         self.hand_obj = self.hands.Hands(max_num_hands=1)
         self.drawing = mp.solutions.drawing_utils
         
-        self.cap = cv2.VideoCapture(0)
+        self.cap = cv2.VideoCapture(2)
         self.prev = -1
         self.start_init = False
         self.start_time = time.time()

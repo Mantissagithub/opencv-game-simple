@@ -16,7 +16,7 @@ class HandGestureControl(Node):
         self.hand_obj = self.hands.Hands(max_num_hands=1)
         self.drawing = mp.solutions.drawing_utils
         
-        self.cap = cv2.VideoCapture(0)
+        self.cap = cv2.VideoCapture(2)
         self.prev = -1
         self.start_init = False
         self.start_time = time.time()
@@ -61,7 +61,7 @@ class HandGestureControl(Node):
         
         return real_distance
 
-    def publish_cmd_vel(self, count, distance=None):
+    def publish_cmd_vel(self, count, distance=None, frame_width=None, hand_keyPoints=None):
         twist = Twist()
         
         if count == 0 and distance is not None:  
@@ -115,7 +115,7 @@ class HandGestureControl(Node):
 
             if cnt == 0:  
                 distance = self.calculate_distance(hand_keyPoints)
-                self.publish_cmd_vel(cnt, distance) 
+                self.publish_cmd_vel(cnt, distance, frame_width, hand_keyPoints) 
                 self.prev = cnt
                 
             else:  
@@ -124,7 +124,7 @@ class HandGestureControl(Node):
                         self.start_time = time.time()
                         self.start_init = True
                     elif (end_time - self.start_time) > 0.2:
-                        self.publish_cmd_vel(cnt)
+                        self.publish_cmd_  vel(cnt)
                         self.prev = cnt
                         self.start_init = False
 
